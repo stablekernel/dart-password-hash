@@ -1,0 +1,9 @@
+name: password_hash
+version: 1.0.0
+author: Joe Conway <joe.conway@stablekernel.com>
+homepage: https://github.com/stablekernel/dart-password-hash
+description: PBKDF2 password hashing utility
+dependencies:
+  crypto: ^2.0.0
+dev_dependencies:
+  test: '>=0.12.20+13 <0.13.0'
