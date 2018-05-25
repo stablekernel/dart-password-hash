@@ -4,6 +4,8 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 
+import 'package:password_hash/salt.dart';
+
 /// Instances of this type derive a key from a password, salt, and hash function.
 ///
 /// https://en.wikipedia.org/wiki/PBKDF2
@@ -38,11 +40,11 @@ class PBKDF2 {
     }
 
     var numberOfBlocks = (keyLength / _blockSize).ceil();
-    var hmac = new Hmac(hashAlgorithm, UTF8.encode(password));
+    var hmac = new Hmac(hashAlgorithm, utf8.encode(password));
     var key = new ByteData(keyLength);
     var offset = 0;
 
-    var saltBytes = UTF8.encode(salt);
+    var saltBytes = utf8.encode(salt);
     var saltLength = saltBytes.length;
     var inputBuffer = new ByteData(saltBytes.length + 4)
       ..buffer.asUint8List().setRange(0, saltBytes.length, saltBytes);
