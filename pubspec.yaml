@@ -1,15 +1,15 @@
 name: password_hash
-version: 2.0.0-beta
+version: 2.0.0
 author: stable|kernel <jobs@stablekernel.com>
 homepage: https://github.com/stablekernel/dart-password-hash
 description: PBKDF2 password hashing utility
 
 environment:
-  sdk: ">=2.0.0-dev <3.0.0"
+  sdk: ">=2.0.0 <3.0.0"
 
 dependencies:
   crypto: ^2.0.0
 
 dev_dependencies:
-  test: '>=0.12.20+13 <0.13.0'
+  test: ^1.3.0
 
