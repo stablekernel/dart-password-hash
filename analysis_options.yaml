@@ -1,14 +1,9 @@
-analyzer:
-  strong-mode: true
-
 linter:
   rules:
     - camel_case_types
     - empty_constructor_bodies
     - always_declare_return_types
-    - camel_case_types
     - constant_identifier_names
-    - empty_constructor_bodies
     - implementation_imports
     - library_names
     - library_prefixes
@@ -18,7 +13,6 @@ linter:
     - package_prefixed_library_names
     - prefer_is_not_empty
     - slash_for_doc_comments
-    - super_goes_last
     - type_annotate_public_apis
     - type_init_formals
     - unnecessary_getters_setters
@@ -34,14 +28,12 @@ linter:
     - iterable_contains_unrelated_type
     - list_remove_unrelated_type
     - test_types_in_equals
-    - throw_in_finally
     - valid_regexps
     - annotate_overrides
     - avoid_init_to_null
     - avoid_return_types_on_setters
     - await_only_futures
     - empty_catches
-    - prefer_is_not_empty
     - sort_constructors_first
     - sort_unnamed_constructors_first
     - unawaited_futures
