@@ -13,18 +13,18 @@ class PBKDF2 {
   /// Creates instance capable of generating a key.
   ///
   /// [hashAlgorithm] defaults to [sha256].
-  PBKDF2({Hash hashAlgorithm}) {
+  PBKDF2({Hash? hashAlgorithm}) {
     this.hashAlgorithm = hashAlgorithm ?? sha256;
   }
 
-  Hash get hashAlgorithm => _hashAlgorithm;
-  set hashAlgorithm(Hash algorithm) {
+  Hash? get hashAlgorithm => _hashAlgorithm;
+  set hashAlgorithm(Hash? algorithm) {
     _hashAlgorithm = algorithm;
-    _blockSize = _hashAlgorithm.convert([1, 2, 3]).bytes.length;
+    _blockSize = _hashAlgorithm!.convert([1, 2, 3]).bytes.length;
   }
 
-  Hash _hashAlgorithm;
-  int _blockSize;
+  Hash? _hashAlgorithm;
+  late int _blockSize;
 
   /// Hashes a [password] with a given [salt].
   ///
@@ -40,7 +40,7 @@ class PBKDF2 {
     }
 
     var numberOfBlocks = (keyLength / _blockSize).ceil();
-    var hmac = new Hmac(hashAlgorithm, utf8.encode(password));
+    var hmac = new Hmac(hashAlgorithm!, utf8.encode(password));
     var key = new ByteData(keyLength);
     var offset = 0;
 
@@ -90,7 +90,7 @@ class PBKDF2Exception implements Exception {
 
 class _XORDigestSink extends Sink<Digest> {
   _XORDigestSink(ByteData inputBuffer, Hmac hmac) {
-    lastDigest = hmac.convert(inputBuffer.buffer.asUint8List()).bytes;
+    lastDigest = hmac.convert(inputBuffer.buffer.asUint8List()).bytes as Uint8List;
     bytes = new ByteData(lastDigest.length)
       ..buffer.asUint8List().setRange(0, lastDigest.length, lastDigest);
   }
@@ -109,12 +109,12 @@ class _XORDigestSink extends Sink<Digest> {
     return hashSink.bytes.buffer.asUint8List();
   }
 
-  ByteData bytes;
-  Uint8List lastDigest;
+  late ByteData bytes;
+  late Uint8List lastDigest;
 
   @override
   void add(Digest digest) {
-    lastDigest = digest.bytes;
+    lastDigest = digest.bytes as Uint8List;
     for (var i = 0; i < digest.bytes.length; i++) {
       bytes.setUint8(i, bytes.getUint8(i) ^ lastDigest[i]);
     }
